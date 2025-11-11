@@ -1,0 +1,92 @@
+2)
+lw $1 , first ($0)
+lw $2 , second ($0)
+add $3 , $1 , $2
+first :
+. fill 8618
+second :
+. fill 16388
+
+0010000110101010
+0100000000000100
+________________
+0110000110101110
+
+25006
+
+3)
+a)
+add $1 , $0 , $0
+add $4 , $0 , $0
+lw $3 , data ($0)
+
+Loop :
+slti $1 , $3 , 18
+jeq $1 , $0 , Skip
+add $4 , $4 , $3
+addi $3 , $3 , 1
+jeq $0 , $0 , Loop
+
+Skip :
+halt
+data :
+. fill 16
+
+15 instructions are executed before this code ends.
+b) 4 CPI * 15 I = 60 Cycles
+c)
+1*10^6 cycles/sec * 1 instruction/4 cycles = 2.5*10^5 instructions/sec
+
+sec/ 2.5*10^5 instructions * 15 instructions  = 6*10^-5 seconds = 60 micro seconds
+ 
+ 4a)
+ instruction a and c conflict with register 1 
+ instruction b and c conflict with register 2 
+ instruction d and e conflict with register 3 
+ b)
+Time | IF | ID  | EX | MEM | WB
+1    | a  |     |   |     | 
+2    | b  |  a  |   |     | 
+3    | c  |  b  | a |     | 
+4    | c  |     | b |  a  |
+5    | c  |     |   |  b  | a
+6    | c  |     |   |     | b 
+7    | d  | c   |   |     | 
+8    | e  | d   | c |     | 
+9    | e  |     | d |  c  | 
+10   | e  |     |   |  d  |c
+11   | e  |     |   |     |d
+12   |    | e   |   |     | 
+13   |    |     | e |     | 
+14   |    |     |   | e   | 
+15   |    |     |   |     |e
+
+c) the new order would be abdce  
+d)
+Time | IF | ID  | EX | MEM | WB
+1    | a  |     |   |     | 
+2    | b  |  a  |   |     | 
+3    | d  |  b  | a |     | 
+4    | c  |  d  | b |  a  |
+5    | c  |     | d |  b  | a
+6    | c  |     |   |  d  | b 
+7    | e  | c   |   |     | d 
+8    |    | e   | c |     | 
+9    |    |     | e |  c  | 
+10   |    |     |   |  e  | c
+11   |    |     |   |     | e
+
+
+5
+a) 400 ps
+1 cycle would have to be 400 ps minimum
+1 Cycle / 400 * 10^-12s = 2500000000
+2.5*10^9 Hz 
+ANSWER : 2.5Ghz
+b) 250 ps 
+  1/250*10^-12 = 4000000000
+  ANSWER: 4GHZ 
+6)
+a)Penalty is 7 mistakes 21 clock cycle penalties
+b)Penalty is 4 mistakes 12 clock cycle penalties
+c)Penalty is 4 mistakes 12 clock cycle penalties
